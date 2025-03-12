@@ -1,0 +1,21 @@
+---
+- name: Execute commands as a bash script
+  hosts: ec2_instances
+  become: true
+  vars:
+    ansible_user: maintuser
+    ansible_ssh_private_key_file: /path/to/your/.pem/file
+  tasks:
+    - name: Write bash script to file
+      copy:
+        content: |
+          #!/bin/bash
+          mkdir -p /opt/new_directory
+          wget -O /opt/new_directory/your_bin_file_url
+          chmod +x /opt/new_directory/your_bin_file
+          /opt/new_directory/your_bin_file
+        dest: /tmp/execute_commands.sh
+        mode: '0755'
+
+    - name: Execute the bash script
+      command: /tmp/execute_commands.sh

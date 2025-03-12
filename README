@@ -1,0 +1,2 @@
+#Hoow to execute the ansible script
+ansible-playbook -i inventory.ini ec2_ansible_playbook.yml
